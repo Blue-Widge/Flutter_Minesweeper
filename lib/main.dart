@@ -13,9 +13,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Minesweeper',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Minesweeper'),
     );
   }
 }
@@ -30,16 +30,33 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage>
 {
-  int gridWidth = 9, gridHeight = 12, mineNumber = 3, caseSize = 24;
+  int gridWidth = 9, gridHeight = 12, mineNumber = 3;
 
   @override
   Widget build(BuildContext context)
   {
+    double windowWidth = MediaQuery.of(context).size.width;
+
+    double caseSize = windowWidth / 20;
+    caseSize = caseSize > 24 ? 24 : caseSize;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Container(child: GridDisplay(gridWidth, gridHeight, mineNumber, null, caseSize))
+      body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+              const Text("Minesweeper"),
+              Expanded(child:
+              Align(child:Container(
+                constraints: const BoxConstraints(maxWidth: 400),
+                child: GridDisplay(gridWidth, gridHeight, mineNumber, caseSize),
+                )
+              )
+              )
+          ]
+      )
     );
   }
 }

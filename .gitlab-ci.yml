@@ -1,17 +1,11 @@
+image: cirrusci/flutter:latest
+
 stages:
   - build
   - test
   - deploy
 
-variables:
-  FLUTTER_VERSION: "2.10.3" # Specify your desired Flutter version
-
 before_script:
-  - apt-get update
-  - apt-get install -y wget unzip xz-utils libglu1-mesa
-  - wget https://storage.googleapis.com/flutter_infra/releases/stable/linux/flutter_linux_${FLUTTER_VERSION}-stable.tar.xz
-  - tar xf flutter_linux_${FLUTTER_VERSION}-stable.tar.xz
-  - export PATH="$PATH:`pwd`/flutter/bin"
   - flutter doctor
   - flutter pub get
 
